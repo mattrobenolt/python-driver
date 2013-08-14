@@ -20,7 +20,7 @@ supported_reactors = [AsyncoreConnection]
 try:
     from cassandra.io.libevreactor import LibevConnection
     supported_reactors.append(LibevConnection)
-except ImportError, exc:
+except ImportError as exc:
     log.warning("Not benchmarking libev reactor: %s" % (exc,))
 
 KEYSPACE = "testkeyspace"

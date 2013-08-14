@@ -57,14 +57,14 @@ class doc(Command):
                 output = subprocess.check_output(
                     ["sphinx-build", "-b", mode, "docs", path],
                     stderr=subprocess.STDOUT)
-            except subprocess.CalledProcessError, exc:
+            except subprocess.CalledProcessError as exc:
                 raise RuntimeError("Documentation step '%s' failed: %s: %s" % (mode, exc, exc.output))
             else:
-                print output
+                print(output)
 
-            print ""
-            print "Documentation step '%s' performed, results here:" % mode
-            print "   %s/" % path
+            print("")
+            print("Documentation step '%s' performed, results here:" % mode)
+            print("   %s/" % path)
 
 
 class build_extensions(build_ext):
@@ -110,7 +110,7 @@ On OSX, via homebrew:
     def run(self):
         try:
             build_ext.run(self)
-        except DistutilsPlatformError, exc:
+        except DistutilsPlatformError as exc:
             sys.stderr.write('%s\n' % str(exc))
             warnings.warn(self.error_message % "C extensions.")
 
@@ -118,7 +118,7 @@ On OSX, via homebrew:
         try:
             build_ext.build_extension(self, ext)
         except (CCompilerError, DistutilsExecError,
-                DistutilsPlatformError, IOError), exc:
+                DistutilsPlatformError, IOError) as exc:
             sys.stderr.write('%s\n' % str(exc))
             name = "The %s extension" % (ext.name,)
             warnings.warn(self.error_message % (name,))
